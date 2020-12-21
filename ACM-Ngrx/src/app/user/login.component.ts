@@ -1,12 +1,16 @@
-import { getMaskUserName } from './user-store/user.selectors';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs';
+
 import { AuthService } from './auth.service';
-import { select, Store } from '@ngrx/store';
-import { State } from './user-store/user.reducer';
-import * as UserActions from './user-store/user.actions';
+
+/* NgRx */
+import { Store } from '@ngrx/store';
+import { State } from '../state/app.state';
+import { getMaskUserName } from './state/user.reducer';
+import { UserPageActions } from './state/actions';
 
 @Component({
   templateUrl: './login.component.html',
@@ -15,14 +19,12 @@ import * as UserActions from './user-store/user.actions';
 export class LoginComponent implements OnInit {
   pageTitle = 'Log In';
 
-  maskUserName: boolean;
+  maskUserName$: Observable<boolean>;
 
-  constructor(private authService: AuthService, private router: Router, private store: Store<State> ) { }
+  constructor(private store: Store<State>, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.store.pipe(select(getMaskUserName)).subscribe(
-      mask => this.maskUserName = mask
-    )
+    this.maskUserName$ = this.store.select(getMaskUserName);
   }
 
   cancel(): void {
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   checkChanged(): void {
-    this.store.dispatch(UserActions.maskUserName());
+    this.store.dispatch(UserPageActions.maskUserName());
   }
 
   login(loginForm: NgForm): void {

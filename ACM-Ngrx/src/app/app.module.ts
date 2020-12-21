@@ -1,4 +1,3 @@
-import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,8 +16,11 @@ import { PageNotFoundComponent } from './home/page-not-found.component';
 
 /* Feature Modules */
 import { UserModule } from './user/user.module';
+
+/* NgRx */
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
@@ -31,7 +33,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       name: 'APM Demo App DevTools',
-      maxAge:25,
+      maxAge: 25,
       logOnly: environment.production
     }),
     EffectsModule.forRoot([])

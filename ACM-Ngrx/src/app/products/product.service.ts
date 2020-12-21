@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { Product } from './product';
@@ -10,7 +10,7 @@ import { Product } from './product';
   providedIn: 'root',
 })
 export class ProductService {
-  private productsUrl = 'api/products1';
+  private productsUrl = 'api/products';
 
   constructor(private http: HttpClient) { }
 
