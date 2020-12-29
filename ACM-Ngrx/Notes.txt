@@ -1,4 +1,4 @@
- switchMap -> 
+switchMap -> 
     Cancels the current subscription/request and can cause race condition.
     User for get requests or cancelable requests like searches.
 
@@ -12,4 +12,17 @@ mergeMap ->
 
 exhaustMap ->
     Ignores all subsequent subscriptions/requests until it completes.
-    Use for login when you do not wnat more requests until the initial one is complete.
+    Use for login when you do not want more requests until the initial one is complete.
+
+flatMap ->
+
+
+AsyncSubject ->
+   Only emits a value when completed
+
+BehaviorSubject ->
+   Emits the last value whenever it is subscribed
+
+ReplaySubject -> 
+   Emits all Previous values whenever it is subscribed
+	
